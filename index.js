@@ -51,15 +51,28 @@ const form = document.getElementById('form')
 const inputNumber = document.querySelector('#number-input')
 const btnSubmit = document.querySelector('#btn-submit')
 const pizzaContainer = document.querySelector('#pizza-container')
+const error = document.getElementById('error')
 
-const buscarPizza = pizzas.find((e,pizza) =>{
+const localPizza = JSON.stringify('pizza', inputNumber) || '';
+
+
+//funcion para buscar la pizza con el id ingresado
+const buscarPizza = (e)=>{
   e.preventDefault()
-  pizza.id == inputNumber.value
-  console.log(pizza)
-})
+  const pizza = pizzas.find((pizza) => pizza.id == inputNumber.value)
 
+  if(pizza){
+  pizzaContainer.innerHTML=`<div id="card-pizza">
+  <h2>${pizza.nombre}</h2>
+  <img src=${pizza.imagen} alt="${pizza.name}" class="img-container"/>
+  <p>$${pizza.precio}</p>
+  </div> `}
+
+}
+
+//funcion inicializadora
 function init () {
-
+  form.addEventListener('submit', buscarPizza)
 }
 
 init()
