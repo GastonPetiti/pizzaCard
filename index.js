@@ -53,7 +53,17 @@ const btnSubmit = document.querySelector('#btn-submit')
 const pizzaContainer = document.querySelector('#pizza-container')
 const error = document.getElementById('error')
 
-const localPizza = JSON.stringify('pizza', inputNumber) || '';
+/*const localPizza = (pizza)=>{
+  localStorage.setItem('ultimaPizza',JSON.stringify(pizza))
+};
+
+const ultimaPizza = localStorage.getItem('ultimaPizza')
+
+const recuperLocalPizza = ()=>{
+  if (ultimaPizza){
+
+  }
+}*/
 
 
 //funcion para buscar la pizza con el id ingresado
@@ -67,14 +77,14 @@ const buscarPizza = (e)=>{
     const textError = error.textContent = `No se ingreso ningún número. Tenes que ingresar un número`
 
     const sessionError = sessionStorage.setItem('error',JSON.stringify(textError))
-    JSON.parse(sessionStorage.getItem(sessionError))
+    sessionStorage.getItem('error',JSON.parse(sessionStorage.getItem(sessionError)))
     
     return    
   }
 
   
   if(pizza){
-    pizzaContainer.innerHTML=`<div id="card-pizza">
+   const cardPizza = pizzaContainer.innerHTML=`<div id="card-pizza">
     <h2>${pizza.nombre}</h2>
     <img src=${pizza.imagen} alt="${pizza.name}" class="img-container"/>
     <p>$${pizza.precio}</p>
@@ -99,12 +109,29 @@ const buscarPizza = (e)=>{
   }
 }
 
-//funcion para verificar id que no es valido
+//funcion para traer la pizza del localStorage
+
+const pizzaStorage = () => {
+  const ultimaPizza = JSON.parse(localStorage.getItem("pizza"))
+
+  if(ultimaPizza){
+    pizzaContainer.innerHTML=`<div id="card-pizza">
+    <h2>${ultimaPizza.nombre}</h2>
+    <img src=${ultimaPizza.imagen} alt="${ultimaPizza.name}" class="img-container"/>
+    <p>$${ultimaPizza.precio}</p>
+    </div> `
+    inputNumber.value=""
+    error.style.display ="none"
+  } else{
+    pizzaContainer.innerHTML = ""
+  }
+}
 
 
 
 //funcion inicializadora
 function init () {
+  document.addEventListener("DOMContentLoaded",pizzaStorage)
   form.addEventListener('submit', buscarPizza)
 }
 
