@@ -53,20 +53,8 @@ const btnSubmit = document.querySelector('#btn-submit')
 const pizzaContainer = document.querySelector('#pizza-container')
 const error = document.getElementById('error')
 
-/*const localPizza = (pizza)=>{
-  localStorage.setItem('ultimaPizza',JSON.stringify(pizza))
-};
 
-const ultimaPizza = localStorage.getItem('ultimaPizza')
-
-const recuperLocalPizza = ()=>{
-  if (ultimaPizza){
-
-  }
-}*/
-
-
-//funcion para buscar la pizza con el id ingresado
+//funcion para buscar la pizza con el id ingresado y guardar en localStorage la pizza
 const buscarPizza = (e)=>{
   e.preventDefault()
   const pizza = pizzas.find((pizza) => pizza.id == inputNumber.value)
